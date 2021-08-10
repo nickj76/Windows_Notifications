@@ -1,14 +1,20 @@
-<#
-	.NOTES
-	===========================================================================
-	 Created on:   	21/04/2021 11:00 AM
-	 Created by:   	Maurice Daly / Ben Whitmore
-	 Organization: 	CloudWay
-	 Filename:     	Invoke-DiskHealthNotification.ps1
-	===========================================================================
-	.DESCRIPTION
-		Monitors WMI values for hard disk health, helping you predict or detect
-		anomalies and be preactive about hard disk replacement.
+<# 
+.SYNOPSIS
+   Simple Toast Notification Script 
+
+.DESCRIPTION
+   Simple Toast Notification Script that uses base64 to encode the heroimage
+
+.EXAMPLE
+   PS C:\> .\install-wrapper-script.ps1
+   Save the file to your hard drive with a .PS1 extention and run the file from an elavated PowerShell prompt.
+
+.NOTES
+   Parts of this script thanks to Maurice Daly / Ben Whitmore.
+
+.FUNCTIONALITY
+   PowerShell v3+
+
 #>
 
 Param
@@ -21,10 +27,9 @@ Param
 
 #Create Toast Variables
 $ToastTitle = "Please note that your hard drive is currently operating outside of healthy parameters. Please contact the IT service desk to arrange a replacement."
-$Signature = "Monitored by Proactive Remediations"
+$Signature = "Monitored by IT Services"
 $ButtonTitle = "IT Service Desk"
 $ButtonAction = "https://it.surrey.ac.uk/contact-us"
-$SnoozeTitle = "Snooze"
 
 #ToastDuration: Short = 7s, Long = 25s
 $ToastDuration = "long"
@@ -66,7 +71,7 @@ function Display-ToastNotification
 {
 	
 	#Fetching images from URI
-	$WebClient = New-Object System.Net.WebClient
+	#$WebClient = New-Object System.Net.WebClient
 	#$WebClient.DownloadFile("$BadgeImageUri", "$BadgeImage")
 	#$WebClient.DownloadFile("$HeroImageUri", "$HeroImage")
 	
