@@ -26,8 +26,10 @@ Param
 #region ToastCustomisation
 
 #Create Toast Variables
-$ToastTitle = "Please note that your hard drive is currently operating outside of healthy parameters. Please contact the IT service desk to arrange a replacement."
-$Signature = "Monitored by IT Services, University of Surrey."
+$HeaderText = "Warning......Device Health Issue Detected."
+$CustomHello = "Missing or Disabled Device Driver."
+$ToastTitle = "Please note that a device driver is missing or disabled on your device. Please contact the IT service desk for assistance in fixing this."
+$Signature = "IT Services, University of Surrey."
 $ButtonTitle = "IT Service Desk"
 $ButtonAction = "https://it.surrey.ac.uk/contact-us"
 
@@ -217,25 +219,32 @@ function Display-ToastNotification
 			Write-Output "DisplayName could not be obtained, it will be blank in the Toast"
 		}
 		
-		$CustomHello = "Disk Health Issue Detected"
-		
 		#Load Assemblies
 		[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
 		[Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
 		
 		#Build XML ToastTemplate 
 		[xml]$ToastTemplate = @"
-<toast duration="$ToastDuration" scenario="reminder">
-    <visual>
-        <binding template="ToastGeneric">
-            <text>$CustomHello</text>
-            <text>$ToastTitle</text>
-            <text placement="attribution">$Signature</text>
-            <image placement="hero" src="$HeroImage"/>
-        </binding>
-    </visual>
-    <audio src="ms-winsoundevent:notification.default"/>
-</toast>
+		<toast duration="$ToastDuration" scenario="reminder">
+		<visual>
+			<binding template="ToastGeneric">
+			<text>$HeaderText</text>
+				<group>
+				<subgroup>
+					<text hint-style="Body" hint-wrap="true" >$CustomHello</text>
+				</subgroup>
+				</group>
+				<group>
+				<subgroup>     
+					<text hint-style="body" hint-wrap="true" >$ToastTitle</text>
+				</subgroup>
+				</group>
+				<text placement="attribution">$Signature</text>
+				<image placement="hero" src="$HeroImage"/>
+			</binding>
+		</visual>
+		<audio src="ms-winsoundevent:notification.default"/>
+	</toast>
 "@
 		
 		#Build XML ActionTemplate 
