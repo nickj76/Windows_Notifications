@@ -192,7 +192,7 @@ function Display-ToastNotification
 			}
 		}
 		
-		#Try to get the DisplayName from whoami
+		#Try to get the DisplayName from whoami.
 		If ($Null -eq $Firstname)
 		{
 			Try
@@ -208,7 +208,7 @@ function Display-ToastNotification
 			}
 		}
 		
-		#If DisplayName could not be obtained, leave it blank
+		#If DisplayName could not be obtained, leave it blank.
 		If ($Null -eq $Firstname)
 		{
 			Write-Output "DisplayName could not be obtained, it will be blank in the Toast"
