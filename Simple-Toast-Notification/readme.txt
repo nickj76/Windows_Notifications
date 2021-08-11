@@ -2,7 +2,7 @@ This is a PowerShell Script to show custom toast notifications in windows. Every
 
 Variables.
 
-To change the message displayed open the script in your preferred editor and scroll to line 28 or #create toast variables  and change as needed
+To change the message displayed open the script in your preferred editor and scroll to line 28 or #create toast variables and change as needed, this eliminated the need to point to an xml file.
 
 #Create Toast Variables
 $HeaderText = "Warning......Device Health Issue Detected."
