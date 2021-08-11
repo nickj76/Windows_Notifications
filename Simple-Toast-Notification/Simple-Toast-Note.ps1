@@ -29,9 +29,9 @@ Param
 $HeaderText = "Warning......Device Health Issue Detected."
 $CustomHello = "Missing or Disabled Device Driver."
 $ToastTitle = "Please note that a device driver is missing or disabled on your device. Please contact the IT service desk for assistance in fixing this."
-$Signature = "IT Services, University of Surrey."
+$Signature = "IT Services."
 $ButtonTitle = "IT Service Desk"
-$ButtonAction = "https://it.surrey.ac.uk/contact-us"
+$ButtonAction = "https://it.example.ac.uk/contact-us"
 
 #ToastDuration: Short = 7s, Long = 25s
 $ToastDuration = "long"
