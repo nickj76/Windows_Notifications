@@ -26,7 +26,7 @@ Param
 #region ToastCustomisation
 
 #Create Toast Variables
-$HeaderText = "Warning......Device Health Issue Detected."
+$HeaderText = "Device Health Issue Detected."
 $CustomHello = "Warning: Missing or Disabled Device Driver."
 $ToastTitle = "Please note that a device driver is missing or disabled on your device. Please contact the IT service desk for assistance in fixing this."
 $Signature = "IT Services."
