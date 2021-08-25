@@ -28,9 +28,9 @@ Param
 #Create Toast Variables
 $HeaderText = "Device Health Issue Detected."
 $CustomHello = "Warning: Important Windows Updates Missing."
-$ToastTitle = "Please note we need to install urgent security updates on your device, as part of this process your machine will be restarted."
+$ToastTitle = "Please note we need to install urgent Windows security updates on your device, as part of this process your machine will be restarted."
 $Signature = "IT Services, University of Surrey."
-$ButtonTitle = "IT Service Desk"
+$ButtonTitle = "More Information"
 $ButtonAction = "https://it.surrey.ac.uk/contact-us"
 
 #ToastDuration: Short = 7s, Long = 25s
