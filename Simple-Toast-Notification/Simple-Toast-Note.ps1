@@ -3,10 +3,10 @@
    Simple Toast Notification Script 
 
 .DESCRIPTION
-   Simple Toast Notification Script that uses base64 to encode the heroimage
+   Simple Toast Notification Script that uses base64 to encode the heroimage and badgeimage.
 
 .EXAMPLE
-   PS C:\> .\install-wrapper-script.ps1
+   PS C:\> .\Simple-Toast-Note.ps1
    Save the file to your hard drive with a .PS1 extention and run the file from an elavated PowerShell prompt.
 
 .NOTES
