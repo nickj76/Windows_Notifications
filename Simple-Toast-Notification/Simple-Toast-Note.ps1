@@ -26,9 +26,9 @@ Param
 #region ToastCustomisation
 
 #Create Toast Variables
-$HeaderText = "Device Health Issue Detected."
-$CustomHello = "Warning: Missing or Disabled Device Driver."
-$ToastTitle = "Please note that a device driver is missing or disabled on your device. Please contact the IT service desk for assistance in fixing this."
+$HeaderText = "Testing Toast Notifications."
+$CustomHello = "This is a Test of Notifications"
+$ToastTitle = "Please note that this is Testing of Toast Notifications "
 $Signature = "IT Services, University of Surrey."
 $ButtonTitle = "IT Service Desk"
 $ButtonAction = "https://it.surrey.ac.uk/contact-us"
