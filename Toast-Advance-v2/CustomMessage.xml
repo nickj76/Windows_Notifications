@@ -2,7 +2,7 @@
 <ToastContent>
     <ToastTitle>We want to bring to your attention some important information. Please review the details below before contacting the Service Desk</ToastTitle>
     <Signature>Sent on behalf of the IT Service Desk</Signature>
-    <EventTitle>Testing Toast Notifications.</EventTitle>
+    <EventTitle>Testing Toast Notes.</EventTitle>
     <EventText>We are currently experiencing problems with all our systems. We are drinking coffee with our feet up and will provide an update shortly. Thank you for your patience</EventText>
     <ButtonTitle>Details</ButtonTitle>
     <ButtonAction>https://it.surrey.ac.uk/contact-us</ButtonAction>
