@@ -300,3 +300,12 @@ if ($DriveHealthIssue -eq $true)
 }
 
 #endregion ScriptRunningCode
+
+## Create Detection Method that Toast has run. 
+$logfilespath = "C:\logfiles"
+If(!(test-path $logfilespath))
+{
+      New-Item -ItemType Directory -Force -Path $logfilespath
+}
+
+New-Item -ItemType "file" -Path "c:\logfiles\toast-testing.txt"
