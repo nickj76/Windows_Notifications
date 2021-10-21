@@ -102,6 +102,8 @@ If ($XMLValid -eq $True) {
 
     #Set COM App ID > To bring a URL on button press to focus use a browser for the appid e.g. MSEdge
     #$LauncherID = "Microsoft.SoftwareCenter.DesktopToasts"
+    #$Launcherid = "Microsoft.CompanyPortal_8wekyb3d8bbwe!App"
+    #$LauncherID = "MSEdge"
     #$LauncherID = "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe"
     $Launcherid = "Microsoft.CompanyPortal_8wekyb3d8bbwe!App"
 
