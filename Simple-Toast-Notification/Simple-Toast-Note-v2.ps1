@@ -13,7 +13,7 @@
    Parts of this script thanks to Maurice Daly / Ben Whitmore.
 
 .FUNCTIONALITY
-   PowerShell v3+
+   PowerShell v1+
 
 #>
 
