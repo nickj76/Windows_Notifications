@@ -1,6 +1,6 @@
 <# 
 .SYNOPSIS
-   Simple Toast Notification Script 
+   Simple Toast Notification Script. 
 
 .DESCRIPTION
    Simple Toast Notification Script that uses base64 to encode the heroimage and badgeimage.
