@@ -2,20 +2,27 @@ This is a PowerShell Script to show custom toast notifications in windows. Every
 
 Variables.
 
-To change the message displayed open the script in your preferred editor and scroll to line 28 or #create toast variables and change as needed, this eliminated the need to point to an xml file.
+To change the message displayed open the script in your preferred editor and scroll to line 30 or #create toast variables and change as needed, this eliminated the need to point to an xml file.
 
-#Create Toast Variables
-$HeaderText = "Warning......Device Health Issue Detected."
-$CustomHello = "Missing or Disabled Device Driver."
-$ToastTitle = "Please note that a device driver is missing or disabled on your device. Please contact the IT service desk for assistance in fixing this."
-$Signature = "IT Services"
+$ToastTitle = "Important Information: Please review the details below before contacting the Service Desk."
+$Signature = "Sent on behalf of the IT Service Desk."
+$EventTitle = "Major IT Issues - All Systems Currently Offline."
+$EventText = "We are currently experiencing problems with all our systems. We are drinking coffee with our feet up and will provide an update shortly. Thank you for your patience."
 $ButtonTitle = "IT Service Desk"
-$ButtonAction = "https://www.example.com/contact-us"
+$ButtonAction = "https://it.surrey.ac.uk/contact-us"
 
-Toast display duration can be changed on line 37
+Toast display duration can be changed on line 38
 
 #ToastDuration: Short = 7s, Long = 25s
 $ToastDuration = "long"
+
+Change AppID on line 86
+
+#Set COM App ID > To bring a URL on button press to focus use a browser for the appid e.g. MSEdge
+#$LauncherID = "Microsoft.SoftwareCenter.DesktopToasts"
+#$Launcherid = "Microsoft.CompanyPortal_8wekyb3d8bbwe!App"
+#$LauncherID = "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe"
+$Launcherid = "MSEdge"
 
 Toast Hero Image
 
