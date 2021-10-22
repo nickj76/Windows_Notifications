@@ -205,20 +205,20 @@ function Display-ToastNotification
 		}
 		
 		#Try to get the DisplayName from whoami.
-		If ($Null -eq $Firstname)
-		{
-			Try
-			{
-				Write-Output "Trying Identity whoami.exe for DisplayName info..."
-				$User = whoami.exe
-				$Firstname = (Get-Culture).textinfo.totitlecase($User.Split("\")[1])
-				Write-Output "DisplayName retrieved from whoami.exe"
-			}
-			Catch
-			{
-				Write-Warning "Could not get DisplayName from whoami.exe"
-			}
-		}
+		#If ($Null -eq $Firstname)
+		#{
+		#	Try
+		#	{
+		#		Write-Output "Trying Identity whoami.exe for DisplayName info..."
+		#		$User = whoami.exe
+		#		$Firstname = (Get-Culture).textinfo.totitlecase($User.Split("\")[1])
+		#		Write-Output "DisplayName retrieved from whoami.exe"
+		#	}
+		#	Catch
+		#	{
+		#		Write-Warning "Could not get DisplayName from whoami.exe"
+		#	}
+		#}
 		
 		#If DisplayName could not be obtained, leave it blank.
 		If ($Null -eq $Firstname)
