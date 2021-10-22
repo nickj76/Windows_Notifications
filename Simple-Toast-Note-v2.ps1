@@ -231,6 +231,7 @@ function Display-ToastNotification
         If ($Hour -lt 12) { $CustomHello = "Good Morning $($Firstname)" }
         ElseIf ($Hour -gt 16) { $CustomHello = "Good Evening $($Firstname)" }
         Else { $CustomHello = "Good Afternoon $($Firstname)" }
+		
 		#Load Assemblies
 		[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
 		[Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
