@@ -30,8 +30,8 @@ Param
 # $CustomHello = "This is a Test of Notifications"
 $ToastTitle = "Important Information: Please review the details below before contacting the Service Desk."
 $Signature = "Sent on behalf of the IT Service Desk."
-$EventTitle = "Major IT Issues - All Systems Currently Offline."
-$EventText = "We are currently experiencing problems with all our systems. We are drinking coffee with our feet up and will provide an update shortly. Thank you for your patience."
+$EventTitle = "Upgrade to Microsoft 365 Apps"
+$EventText = "Your device is about to be upgraded with the latest version of Microsoft 365 Apps. Please save and close any open office applications."
 $ButtonTitle = "IT Service Desk"
 $ButtonAction = "https://it.surrey.ac.uk/contact-us"
 
