@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+	<Feature Name="Toast" Enabled="True" /> <!-- Enables or disables the entire toast notification -->
+    <Option Name="UseSoftwareCenterApp" Enabled="False" />	<!-- The app in Windows doing the action notification - can't be both SoftwareCenter and Powershell -->
+	<Option Name="UsePowershellApp" Enabled="True" />	<!-- The app in Windows doing the action notification - can't be both SoftwareCenter and Powershell -->
+	<Option Name="CustomAudio" Enabled="True" TextToSpeech="Important Information about your computer"/>
+	<Option Name="ActionButton" Enabled="True" Value="OK" />	<!-- Enables or disables the action button. Value is equal to the name displayed on the button -->
+	<Option Name="SnoozeButton" Enabled="True" Value="Snooze" /> <!-- Enabling this option will always enable action button and dismiss button -->
+	<Option Name="Scenario" Type="reminder" />	<!-- Possible values are: reminder | short | long -->
+	<Option Name="Action" Value="YOUR URL HERE" />	<!-- Action taken when using the Action button. Can be link to SoftwareCenter if used with UpgradeOS -->
+	<Text Option="GreetGivenName" Enabled="False" />	<!-- Displays the toast with a personal greeting using the users given name retrieved from AD. Will try retrieval from WMI of no local AD -->
+	<Text Name="AttributionText">IT Services</Text>
+	<Text Name="HeaderText">Low Disk Space Warning!</Text>
+	<Text Name="TitleText">Your computer is running low on disk space.</Text>
+	<Text Name="BodyText1">This is a potential security concern, as we are unable to apply further updates to your computer.</Text>
+	<Text Name="BodyText2">Please free up space and reach out to the IT helpdesk if you require any assistance.</Text>
+	<Text Name="SnoozeText">Click snooze to be reminded again in:</Text>
+	<Text Name="GreetMorningText">Good morning</Text>
+	<Text Name="GreetAfternoonText">Good afternoon</Text>
+	<Text Name="GreetEveningText">Good evening</Text>
+</Configuration>

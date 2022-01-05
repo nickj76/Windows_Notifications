@@ -52,7 +52,7 @@ An example
 param (
     [Parameter(Mandatory = $false)]
     [String]
-    $HeaderText = 'Important message from IT...',
+    $HeaderText = 'Important Information...',
     [Parameter(Mandatory = $true)]
     [String]
     $TitleText,
