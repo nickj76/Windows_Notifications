@@ -1050,3 +1050,12 @@ Invoke-ProcessAsUser -Path 'C:\Windows\System32\WindowsPowerShell\v1.0\powershel
 Start-Sleep -Seconds 10
 Remove-Item -Path "$dirAppDeployTemp\Invoke-ITAlertToast.ps1"
 Remove-Item -Path "$dirAppDeployTemp\alertconfig.json"
+
+## Create Detection Method that Toast has run. 
+$logfilespath = "C:\logfiles"
+If(!(test-path $logfilespath))
+{
+      New-Item -ItemType Directory -Force -Path $logfilespath
+}
+
+New-Item -ItemType "file" -Path "c:\logfiles\toast-njtest.txt"
