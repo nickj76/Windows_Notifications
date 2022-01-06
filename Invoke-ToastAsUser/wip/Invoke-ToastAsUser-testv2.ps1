@@ -1025,7 +1025,6 @@ $ToastXml.LoadXml($Toast.OuterXml)
 '@
 #EndRegion ITAlertScript
 
-
 Add-PSADTCustom
 [Security.Principal.WindowsIdentity]$CurrentProcessToken = [Security.Principal.WindowsIdentity]::GetCurrent()
 [boolean]$IsAdmin = [boolean]($CurrentProcessToken.Groups -contains [Security.Principal.SecurityIdentifier]'S-1-5-32-544')
@@ -1045,7 +1044,6 @@ ConvertTo-Json $Configs > "$dirAppDeployTemp\alertconfig.json"
 $InvokeITAlertToastContents > $dirAppDeployTemp\Invoke-ITAlertToast.ps1
 
 Invoke-ProcessAsUser -Path 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe' -Parameters "-ExecutionPolicy Bypass -NoProfile -File $dirAppDeployTemp\Invoke-ITAlertToast.ps1"
-
 
 Start-Sleep -Seconds 10
 Remove-Item -Path "$dirAppDeployTemp\Invoke-ITAlertToast.ps1"
