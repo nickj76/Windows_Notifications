@@ -38,13 +38,15 @@ How long displayed:
 .PARAMETER DismissButtonText
 This is the text that is displayed in the single button at the bottom of the toast message. Dismiss is the default text.
 
-.EXAMPLE
-An example
+.NOTES
+VERSION: 1.3 - Added simple file based detection method at end of script.
+VERSION: 1.2 - Changed Date format to UK.
+VERSION: 1.1 - Added new Heroimage & logoimage as base64 code. 
+VERSION: 1.0 - Script created. 
 
 .NOTES
+This script is forked from a script created by Paul Wetter and will continue to evolve as I work to get it to meet my needs.
 	NAME: Invoke-ToastAsUser.ps1
-	VERSION: 1.3
-        Original script created by Paul Wetter
 	    Based on content from the PowerShell App Deployment Toolkit (https://psappdeploytoolkit.com)
 	LASTEDIT: 6th January 2022
 #>
@@ -1050,3 +1052,12 @@ Invoke-ProcessAsUser -Path 'C:\Windows\System32\WindowsPowerShell\v1.0\powershel
 Start-Sleep -Seconds 10
 Remove-Item -Path "$dirAppDeployTemp\Invoke-ITAlertToast.ps1"
 Remove-Item -Path "$dirAppDeployTemp\alertconfig.json"
+
+## Create Detection Method that Toast has run. 
+$logfilespath = "C:\logfiles"
+If(!(test-path $logfilespath))
+{
+      New-Item -ItemType Directory -Force -Path $logfilespath
+}
+
+New-Item -ItemType "file" -Path "c:\logfiles\toast-Date.txt"
