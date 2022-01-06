@@ -1038,7 +1038,6 @@ $Configs = [PSCustomObject]@{
     TitleText = "$TitleText";
     BodyText1 = "$BodyText1";
     BodyText2 = "$BodyText2";
-    ActionButton1Content = "$ActionButton1Text";
     DismissButtonContent = "$DismissButtonText";
     Expiration = $Expiration
 }
