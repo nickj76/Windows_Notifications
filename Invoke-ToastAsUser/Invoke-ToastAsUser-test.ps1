@@ -52,16 +52,16 @@ An example
 param (
     [Parameter(Mandatory = $false)]
     [String]
-    $HeaderText = 'IT Servicedesk kindly reminds you...',
+    $HeaderText = 'Important Information: The IT Service Desk kindly reminds you...',
     [Parameter(Mandatory = $false)]
     [String]
-    $TitleText = 'Upgrade to Microsoft 365 Apps',
+    $TitleText = 'This is Nick Testing Toast Notifications',
     [Parameter(Mandatory = $false)]
     [String]
-    $BodyText1 = 'Your device is needs to be upgraded with the latest version of Microsoft 365 Apps. Do yourself a favor and install it yourself.... or we will do it for you ;-)',
+    $BodyText1 = 'This is a test notification',
     [Parameter(Mandatory = $false)]
     [String]
-    $BodyText2 = "Don't worry! You will receive an adequate amount of reminders before any actions are taken automatically.",
+    $BodyText2 = 'This notification is a test of being launched in the System Context but displaying in the User Context.',
     #Format 'dd/MM/yy @ hh:mm tt'
     [Parameter(Mandatory = $false)]
     [String]
