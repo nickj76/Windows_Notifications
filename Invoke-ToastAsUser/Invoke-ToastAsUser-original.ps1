@@ -54,7 +54,7 @@ This script is forked from a script created by Paul Wetter and will continue to 
 param (
     [Parameter(Mandatory = $false)]
     [String]
-    $HeaderText = 'IT Service Desk kindly reminds you...',
+    $HeaderText = 'IT Servicedesk kindly reminds you...',
     [Parameter(Mandatory = $false)]
     [String]
     $TitleText = 'Upgrade to Microsoft 365 Apps',
@@ -1036,7 +1036,7 @@ $dirAppDeployTemp = 'C:\Temp'
 $Configs = [PSCustomObject]@{
     Scenario = "$Scenario";
     HeaderText = "$HeaderText";
-    AttributionText = "Sent on behalf of the IT Service Desk"
+    AttributionText = "Notice Time: $AlertTime"
     TitleText = "$TitleText";
     BodyText1 = "$BodyText1";
     BodyText2 = "$BodyText2";
