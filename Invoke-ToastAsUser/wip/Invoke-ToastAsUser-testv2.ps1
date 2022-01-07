@@ -76,7 +76,13 @@ param (
     $Scenario = 'Reminder',
     [Parameter(Mandatory = $false)]
     [String]
-    $DismissButtonText = 'Dismiss'
+    $DismissButtonText = 'Dismiss',
+    [Parameter(Mandatory = $false)]
+    [String]
+    $ButtonTitleText = 'IT Service Desk',
+    [Parameter(Mandatory = $false)]
+    [String]
+    $ButtonAction = 'https://it.surrey.ac.uk/contact-us'
 )
 
 #If the Expiration variable has been defined and is a Date/Time, then check if the current time is beyond the exipiration time.
@@ -961,6 +967,7 @@ $TitleText = $Config.TitleText #'IT Mail System Offline'
 $BodyText1 = $Config.BodyText1 #"There currently is an outage with Microsoft's cloud services.  This is effecting access to email, MyApps, Sharepoint and various other online services."
 $BodyText2 = $Config.BodyText2 #"Currently there is no estimated time to repair.  We will send an update via toast notice in 2 hours or email when repaired."
 $DismissButtonContent = $Config.DismissButtonContent #'Dismiss' #'Acknowledged'
+$ActionButtonContent = $Config.ActionButtonContent #'IT Service Desk' #'More Information'
 
 #Images
 # Picture Base64
@@ -1006,8 +1013,10 @@ $LogoImage = "$env:TEMP\ToastLogoImage.jpg"
         </group>
     </binding>
     </visual>
+    <audio src="ms-winsoundevent:notification.default"/>
     <actions>
-        <action activationType="system" arguments="dismiss" content="$DismissButtonContent"/>
+        <action arguments="$ButtonAction" content="$ButtonTitleText" activationType="protocol" />
+        <action arguments="dismiss" content="Dismiss" activationType="system"/>
     </actions>
 </toast>
 "@
@@ -1033,10 +1042,11 @@ $dirAppDeployTemp = 'C:\Temp'
 $Configs = [PSCustomObject]@{
     Scenario = "$Scenario";
     HeaderText = "$HeaderText";
-    AttributionText = "Notice Time: $AlertTime"
+    AttributionText = "Sent on behalf of the IT Service Desk."
     TitleText = "$TitleText";
     BodyText1 = "$BodyText1";
     BodyText2 = "$BodyText2";
+    ActionButtonContent = "$ButtonTitleText";
     DismissButtonContent = "$DismissButtonText";
     Expiration = $Expiration
 }
