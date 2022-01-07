@@ -67,7 +67,7 @@ param (
     #Format 'dd/MM/yy @ hh:mm tt'
     [Parameter(Mandatory = $false)]
     [String]
-    $AlertTime = (Get-Date -Format 'dd/MM/yy @ hh:mm tt'),
+    $AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt'),
     #Format 'dd/MM/yy or dd/MM/yyyy @ hh:mm tt'
     [Parameter(Mandatory = $false)]
     [String]
@@ -1036,7 +1036,7 @@ $dirAppDeployTemp = 'C:\Temp'
 $Configs = [PSCustomObject]@{
     Scenario = "$Scenario";
     HeaderText = "$HeaderText";
-    AttributionText = "Notice Time: $AlertTime"
+    AttributionText = "Sent by the IT Service Desk: $AlertTime"
     TitleText = "$TitleText";
     BodyText1 = "$BodyText1";
     BodyText2 = "$BodyText2";
