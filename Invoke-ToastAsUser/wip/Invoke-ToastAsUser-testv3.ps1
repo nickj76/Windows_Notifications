@@ -38,13 +38,15 @@ How long displayed:
 .PARAMETER DismissButtonText
 This is the text that is displayed in the single button at the bottom of the toast message. Dismiss is the default text.
 
-.EXAMPLE
-An example
+.NOTES
+VERSION: 1.3 - Added simple file based detection method at end of script.
+VERSION: 1.2 - Changed Date format to UK.
+VERSION: 1.1 - Added new Heroimage & logoimage as base64 code. 
+VERSION: 1.0 - Script created. 
 
 .NOTES
+This script is forked from a script created by Paul Wetter and will continue to evolve as I work to get it to meet my needs.
 	NAME: Invoke-ToastAsUser.ps1
-	VERSION: 1.3
-        Original script created by Paul Wetter
 	    Based on content from the PowerShell App Deployment Toolkit (https://psappdeploytoolkit.com)
 	LASTEDIT: 6th January 2022
 #>
@@ -58,10 +60,10 @@ param (
     $TitleText = 'All are systems are currently offline.',
     [Parameter(Mandatory = $false)]
     [String]
-    $BodyText1 = 'Currently all our systems are down, we are working to restore them but have been delayed by all the cake, tea and coffee.',
+    $BodyText1 = 'we are working to restore them but have been delayed by all the cake, tea and coffee.',
     [Parameter(Mandatory = $false)]
     [String]
-    $BodyText2 = 'FYI: This is Nick Testing Toast Notifications (launching in the system context but displaying in the user context).',
+    $BodyText2 = "Don't worry! You will receive an adequate amount of reminders before any actions are taken automatically.",
     #Format 'dd/MM/yy @ hh:mm tt'
     [Parameter(Mandatory = $false)]
     [String]
@@ -962,7 +964,6 @@ $BodyText1 = $Config.BodyText1 #"There currently is an outage with Microsoft's c
 $BodyText2 = $Config.BodyText2 #"Currently there is no estimated time to repair.  We will send an update via toast notice in 2 hours or email when repaired."
 $DismissButtonContent = $Config.DismissButtonContent #'Dismiss' #'Acknowledged'
 
-
 #Images
 # Picture Base64
 # Create the picture object from a base64 code - HeroImage.
@@ -1007,9 +1008,8 @@ $LogoImage = "$env:TEMP\ToastLogoImage.jpg"
         </group>
     </binding>
     </visual>
-    <audio src="ms-winsoundevent:notification.default"/>
     <actions>
-        <action arguments="dismiss" content="Dismiss" activationType="system"/>
+        <action activationType="system" arguments="dismiss" content="$DismissButtonContent"/>
     </actions>
 </toast>
 "@
@@ -1027,6 +1027,7 @@ $ToastXml.LoadXml($Toast.OuterXml)
 '@
 #EndRegion ITAlertScript
 
+
 Add-PSADTCustom
 [Security.Principal.WindowsIdentity]$CurrentProcessToken = [Security.Principal.WindowsIdentity]::GetCurrent()
 [boolean]$IsAdmin = [boolean]($CurrentProcessToken.Groups -contains [Security.Principal.SecurityIdentifier]'S-1-5-32-544')
@@ -1035,7 +1036,7 @@ $dirAppDeployTemp = 'C:\Temp'
 $Configs = [PSCustomObject]@{
     Scenario = "$Scenario";
     HeaderText = "$HeaderText";
-    AttributionText = "Sent on behalf of the IT Service Desk."
+    AttributionText = "Sent on behalf of the IT Service Desk"
     TitleText = "$TitleText";
     BodyText1 = "$BodyText1";
     BodyText2 = "$BodyText2";
@@ -1046,6 +1047,7 @@ ConvertTo-Json $Configs > "$dirAppDeployTemp\alertconfig.json"
 $InvokeITAlertToastContents > $dirAppDeployTemp\Invoke-ITAlertToast.ps1
 
 Invoke-ProcessAsUser -Path 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe' -Parameters "-ExecutionPolicy Bypass -NoProfile -File $dirAppDeployTemp\Invoke-ITAlertToast.ps1"
+
 
 Start-Sleep -Seconds 10
 Remove-Item -Path "$dirAppDeployTemp\Invoke-ITAlertToast.ps1"
@@ -1058,4 +1060,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\toast-njtest.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\toast-Date.txt"
