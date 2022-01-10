@@ -57,7 +57,7 @@ param (
     $HeaderText = 'Important Information: Global Protect Upgrade.',
     [Parameter(Mandatory = $false)]
     [String]
-    $TitleText = 'Upgrading to the latest version of Global Protect.',
+    $TitleText = 'New version of Global Protect Client Installed.',
     [Parameter(Mandatory = $false)]
     [String]
     $BodyText1 = 'Your device has been upgraded to the latest version of the global protect client, should you encounter any issues please contact the IT Service Desk.',
