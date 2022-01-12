@@ -54,7 +54,7 @@ This script is forked from a script created by Paul Wetter and will continue to 
 param (
     [Parameter(Mandatory = $false)]
     [String]
-    $HeaderText = 'Important Information: please review the below before contacting the IT Service Desk...',
+    $HeaderText = 'Important Information: please review the below before contacting the IT Service Desk.',
     [Parameter(Mandatory = $false)]
     [String]
     $TitleText = 'Upgrade to Microsoft 365 Apps',
