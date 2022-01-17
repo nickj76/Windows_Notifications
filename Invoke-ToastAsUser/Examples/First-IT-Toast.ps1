@@ -45,10 +45,6 @@ VERSION: 1.1 - Added new Heroimage & logoimage as base64 code.
 VERSION: 1.0 - Script created. 
 
 .NOTES
-This script is forked from a script created by Paul Wetter and will continue to evolve as I work to get it to meet my needs.
-	NAME: Invoke-ToastAsUser.ps1
-	    Based on content from the PowerShell App Deployment Toolkit (https://psappdeploytoolkit.com)
-	LASTEDIT: 6th January 2022
 #>
 [CmdletBinding()]
 param (
