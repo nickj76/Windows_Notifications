@@ -31,8 +31,8 @@ Param
 $ToastTitle = "Launch of the IT team notifications service."
 $Signature = "Sent on behalf of the IT Service Desk."
 $EventTitle = "The IT team are improving the way we communicate with you."
-$EventText = "Important IT notices and updates from the IT team can get lost or missed in your inboxes, SurreyNet and the IT status hub. From today, IT notices like this one will pop up on your desktop to alert you to key software upgrades, service outages and PC hardware warnings."
-$ButtonTitle = "More Info"
+$EventText = "Important IT notices and updates from the IT team."
+$ButtonTitle = "More Information"
 $ButtonAction = "https://it.surrey.ac.uk/contact-us"
 
 #ToastDuration: Short = 7s, Long = 25s
