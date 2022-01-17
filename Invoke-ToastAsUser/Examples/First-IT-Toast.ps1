@@ -54,13 +54,13 @@ This script is forked from a script created by Paul Wetter and will continue to 
 param (
     [Parameter(Mandatory = $false)]
     [String]
-    $HeaderText = 'Launch of the IT team notifications service.',
+    $HeaderText = 'Launch of the notifications service from your IT Team.',
     [Parameter(Mandatory = $false)]
     [String]
-    $TitleText = 'The IT team are improving the way we communicate with you.',
+    $TitleText = 'The IT team are improving the way we alert you to important IT notices.',
     [Parameter(Mandatory = $false)]
     [String]
-    $BodyText1 = 'From today, IT notices like this one will pop up on your desktop to alert you to key software upgrades, service outages and PC hardware warnings.',
+    $BodyText1 = 'From today, IT notices like this one will pop up your desktop to alert you to key software upgrades, service outages and PC hardware warnings.',
     [Parameter(Mandatory = $false)]
     [String]
     $BodyText2 = "For more information about the service please visit the IT FAQs on SurreyNet.",
@@ -1062,4 +1062,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\toast-Date.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\First-IT-Toast.txt"
