@@ -29,11 +29,14 @@ Param
 
 # $CustomHello = "This is a Test of Notifications"
 $ToastTitle = "Launch of the IT team notifications service."
-$Signature = "Sent on behalf of the IT Service Desk."
+$Signature = "Sent by the IT Service Desk: $AlertTime"
 $EventTitle = "The IT team are improving the way we communicate with you."
 $EventText = "Important IT notices and updates from the IT team can get lost or missed in your inboxes, SurreyNet and the IT status hub. From today, IT notices like this one will pop up on your desktop to alert you to key software upgrades, service outages and PC hardware warnings."
-$ButtonTitle = "More Info"
-$ButtonAction = "https://it.surrey.ac.uk/contact-us"
+$EventText2 = "For more information about the service please visit the IT FAQs on SurreyNet."
+$ButtonTitle = "IT FAQs"
+$ButtonAction = "https://portal.surrey.ac.uk/https/surreynet.surrey.ac.uk/staff-services/it-services/faqs"
+
+$AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
 
 #ToastDuration: Short = 7s, Long = 25s
 $ToastDuration = "long"
@@ -241,7 +244,6 @@ function Display-ToastNotification
 		<toast duration="$ToastDuration" scenario="reminder">
     <visual>
         <binding template="ToastGeneric">
-            <text>$CustomHello</text>
             <text>$ToastTitle</text>
             <text placement="attribution">$Signature</text>
             <image placement="hero" src="$HeroImage"/>
@@ -254,6 +256,11 @@ function Display-ToastNotification
             <group>
                 <subgroup>
                     <text hint-style="body" hint-wrap="true" >$EventText</text>
+                </subgroup>
+            </group>
+            <group>
+                <subgroup>
+                    <text hint-style="body" hint-wrap="true" >$EventText2</text>
                 </subgroup>
             </group>
         </binding>

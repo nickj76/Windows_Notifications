@@ -31,9 +31,9 @@ Param
 $ToastTitle = "Launch of the IT team notifications service."
 $Signature = "Sent by the IT Service Desk: $AlertTime"
 $EventTitle = "The IT team are improving the way we communicate with you."
-$EventText = "Important IT notices and updates from the IT team."
+$EventText = "Important IT notices and updates from the IT team can get lost or missed in your inboxes, SurreyNet and the IT status hub. From today, IT notices like this one will pop up on your desktop to alert you to key software upgrades, service outages and PC hardware warnings."
 $EventText2 = "For more information about the service please visit the IT FAQs on SurreyNet."
-$ButtonTitle = "More Information"
+$ButtonTitle = "IT FAQs"
 $ButtonAction = "https://it.surrey.ac.uk/contact-us"
 
 $AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
