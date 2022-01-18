@@ -56,7 +56,7 @@ param (
     $TitleText = 'The IT team are improving the way we alert you to important IT notices.',
     [Parameter(Mandatory = $false)]
     [String]
-    $BodyText1 = 'From today, IT notices like this one will pop up your desktop to alert you to key software upgrades, service outages and PC hardware warnings.',
+    $BodyText1 = 'The IT team are improving the way we alert you to important IT notices and issues with the health of your device. From today, IT notices like this one will pop up your desktop to alert you to key software upgrades, service outages and device health warnings.',
     [Parameter(Mandatory = $false)]
     [String]
     $BodyText2 = "For more information about the service please visit the IT FAQs on SurreyNet.",
