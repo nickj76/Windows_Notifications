@@ -7,13 +7,13 @@
 param (
     [Parameter(Mandatory = $false)]
     [String]
-    $HeaderText = 'Important Information...TexMaker install almost complete',
+    $HeaderText = 'Windows has been updated',
     [Parameter(Mandatory = $false)]
     [String]
-    $TitleText = 'Please restart your computer to complete the installation.',
+    $TitleText = 'Windows update KB5009596 was installed successfully.',
     [Parameter(Mandatory = $false)]
     [String]
-    $BodyText1 = 'The installation of TexMaker is almost finished, please restart your computer to complete this process.',
+    $BodyText1 = 'Windows update KB5009596 was installed successfully, please reboot/restart your computer to complete the installation.',
     [Parameter(Mandatory = $false)]
     [String]
     $BodyText2,
@@ -44,7 +44,7 @@ If (![string]::IsNullOrEmpty($Expiration)){
     }
     Catch{}
 }
-
+<#
 # Run this script / ISE as administrator!
 
 # Download the hotfix
@@ -76,7 +76,7 @@ ForEach ($update in $Updates) {
 # Old hotfix list
 Get-HotFix > "$UpdatePath\new_hotfix_list.txt"
 
-
+#>
 Function Invoke-ProcessAsUser {
     <#
     .SYNOPSIS
