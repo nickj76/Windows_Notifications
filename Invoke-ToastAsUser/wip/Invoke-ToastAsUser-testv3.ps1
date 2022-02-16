@@ -78,8 +78,15 @@ param (
     $Scenario = 'Reminder',
     [Parameter(Mandatory = $false)]
     [String]
-    $DismissButtonText = 'Dismiss'
+    $DismissButtonText = 'Dismiss',
+    [Parameter(Mandatory = $false)]
+    [String]
+    $ActionButtonText = 'Upgrade Now'
 )
+
+$ButtonTitle = "Upgrade Now"
+$ButtonAction = "companyportal:ApplicationId=968d5252-dce4-4629-a885-481914e72c9a"
+
 
 #If the Expiration variable has been defined and is a Date/Time, then check if the current time is beyond the exipiration time.
 If (![string]::IsNullOrEmpty($Expiration)){
@@ -963,6 +970,7 @@ $TitleText = $Config.TitleText #'IT Mail System Offline'
 $BodyText1 = $Config.BodyText1 #"There currently is an outage with Microsoft's cloud services.  This is effecting access to email, MyApps, Sharepoint and various other online services."
 $BodyText2 = $Config.BodyText2 #"Currently there is no estimated time to repair.  We will send an update via toast notice in 2 hours or email when repaired."
 $DismissButtonContent = $Config.DismissButtonContent #'Dismiss' #'Acknowledged'
+$Buttontitle = $Config.Buttontitle #'Upgrade Now' #'Acknowledged'
 
 #Images
 # Picture Base64
@@ -1009,6 +1017,7 @@ $LogoImage = "$env:TEMP\ToastLogoImage.jpg"
     </binding>
     </visual>
     <actions>
+    <action arguments="$ButtonAction" content="$ButtonTitle" activationType="protocol" />
         <action activationType="system" arguments="dismiss" content="$DismissButtonContent"/>
     </actions>
 </toast>
