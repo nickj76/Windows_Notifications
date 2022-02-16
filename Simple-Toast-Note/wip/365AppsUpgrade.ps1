@@ -34,7 +34,7 @@ $EventTitle = "Upgrade to Microsoft 365 Apps"
 $EventText = "Your device needs to be upgraded to Microsoft 365 Apps, this will take around 30 minutes to complete. You can start the upgrade by clicking on the 'Upgrade Now' button."
 $EventText2 = "For more information about this required upgrade please visit the IT FAQs on SurreyNet."
 $ButtonTitle = "Upgrade Now"
-$ButtonAction = "https://it.surrey.ac.uk/contact-us"
+$ButtonAction = "companyportal:ApplicationId=968d5252-dce4-4629-a885-481914e72c9a"
 
 $AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
 
@@ -88,9 +88,9 @@ function Display-ToastNotification
 	
 	#Set COM App ID > To bring a URL on button press to focus use a browser for the appid e.g. MSEdge
 	#$LauncherID = "Microsoft.SoftwareCenter.DesktopToasts"
-	#$Launcherid = "Microsoft.CompanyPortal_8wekyb3d8bbwe!App"
+	$Launcherid = "Microsoft.CompanyPortal_8wekyb3d8bbwe!App"
 	#$LauncherID = "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe"
-	$Launcherid = "MSEdge"
+	#$Launcherid = "MSEdge"
 	
 	#Dont Create a Scheduled Task if the script is running in the context of the logged on user, only if SYSTEM fired the script i.e. Deployment from Intune/ConfigMgr
 	If (([System.Security.Principal.WindowsIdentity]::GetCurrent()).Name -eq "NT AUTHORITY\SYSTEM")
