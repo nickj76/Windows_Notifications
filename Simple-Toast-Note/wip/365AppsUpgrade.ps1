@@ -230,10 +230,10 @@ function Display-ToastNotification
 		}
 
 		#Get Hour of Day and set Custom Hello
-        $Hour = (Get-Date).Hour
-        If ($Hour -lt 12) { $CustomHello = "Good Morning Colleague" }
-        ElseIf ($Hour -gt 16) { $CustomHello = "Good Evening Colleague" }
-        Else { $CustomHello = "Good Afternoon Colleague" }
+        #$Hour = (Get-Date).Hour
+        #If ($Hour -lt 12) { $CustomHello = "Good Morning Colleague" }
+        #ElseIf ($Hour -gt 16) { $CustomHello = "Good Evening Colleague" }
+        #Else { $CustomHello = "Good Afternoon Colleague" }
 
 		#Load Assemblies
 		[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
@@ -316,4 +316,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\toast-22102021.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\365AppsToast-160222.txt"
