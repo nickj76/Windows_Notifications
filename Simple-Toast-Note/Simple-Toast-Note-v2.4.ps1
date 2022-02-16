@@ -207,33 +207,11 @@ function Display-ToastNotification
 			}
 		}
 		
-		#Try to get the DisplayName from whoami.
-		#If ($Null -eq $Firstname)
-		#{
-		#	Try
-		#	{
-		#		Write-Output "Trying Identity whoami.exe for DisplayName info..."
-		#		$User = whoami.exe
-		#		$Firstname = (Get-Culture).textinfo.totitlecase($User.Split("\")[1])
-		#		Write-Output "DisplayName retrieved from whoami.exe"
-		#	}
-		#	Catch
-		#	{
-		#		Write-Warning "Could not get DisplayName from whoami.exe"
-		#	}
-		#}
-		
 		#If DisplayName could not be obtained, leave it blank.
 		If ($Null -eq $Firstname)
 		{
 			Write-Output "DisplayName could not be obtained, it will be blank in the Toast"
 		}
-
-		#Get Hour of Day and set Custom Hello
-        $Hour = (Get-Date).Hour
-        If ($Hour -lt 12) { $CustomHello = "Good Morning Colleague" }
-        ElseIf ($Hour -gt 16) { $CustomHello = "Good Evening Colleague" }
-        Else { $CustomHello = "Good Afternoon Colleague" }
 
 		#Load Assemblies
 		[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
