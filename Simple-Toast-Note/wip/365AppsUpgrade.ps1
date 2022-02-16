@@ -28,9 +28,9 @@ Param
 #Create Toast Variables
 
 # $CustomHello = "This is a Test of Notifications"
-$ToastTitle = "Upgrade to Microsoft 365 Apps"
+$ToastTitle = "Upgrade to Microsoft 365 Apps."
 $Signature = "Sent by the IT Service Desk: $AlertTime"
-$EventTitle = "Upgrade to Microsoft 365 Apps"
+$EventTitle = "Required Upgrade to Microsoft 365 Apps."
 $EventText = "Your device needs to be upgraded to Microsoft 365 Apps, this will take around 30 minutes to complete. You can start the upgrade by clicking on the 'Upgrade Now' button."
 $EventText2 = "For more information about this required upgrade please visit the IT FAQs on SurreyNet."
 $ButtonTitle = "Upgrade Now"
@@ -228,12 +228,6 @@ function Display-ToastNotification
 		{
 			Write-Output "DisplayName could not be obtained, it will be blank in the Toast"
 		}
-
-		#Get Hour of Day and set Custom Hello
-        #$Hour = (Get-Date).Hour
-        #If ($Hour -lt 12) { $CustomHello = "Good Morning Colleague" }
-        #ElseIf ($Hour -gt 16) { $CustomHello = "Good Evening Colleague" }
-        #Else { $CustomHello = "Good Afternoon Colleague" }
 
 		#Load Assemblies
 		[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
