@@ -33,7 +33,7 @@ $Signature = "Sent by the IT Service Desk: $AlertTime"
 $EventTitle = "Required Upgrade to Microsoft 365 Apps."
 $EventText = "Your device needs to be upgraded to Microsoft 365 Apps, this will take around 30 minutes to complete. You can start the upgrade by clicking on the 'Upgrade Now' button."
 $EventText2 = "For more information about this required upgrade please visit the IT FAQs on SurreyNet."
-$EventText3 = "This update will be automatically installed from: 5th April 2022"
+$EventText3 = "This required upgrade will be automatically installed from: 5th April 2022"
 $ButtonTitle = "Upgrade Now"
 $ButtonAction = "companyportal:ApplicationId=968d5252-dce4-4629-a885-481914e72c9a"
 
@@ -243,17 +243,10 @@ function Display-ToastNotification
                 </subgroup>
             </group>
 			<group>
-<<<<<<< HEAD
 				<subgroup>
 					<text hint-style="body" hint-wrap="true" >$EventText3</text>
 				</subgroup>
 			</group>
-=======
-			<subgroup>
-				<text hint-style="body" hint-wrap="true" >$EventText3</text>
-			</subgroup>
-		</group>
->>>>>>> f9674c926a99efd6dd393c05dd0502e0c2a7e632
         </binding>
     </visual>
     <audio src="ms-winsoundevent:notification.default"/>
