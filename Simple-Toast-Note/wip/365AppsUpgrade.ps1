@@ -1,16 +1,16 @@
 <# 
 .SYNOPSIS
-   Simple Toast Notification Script. 
+   Toast notification about upgrading to Microsoft 365 Apps. 
 
 .DESCRIPTION
-   Simple Toast Notification Script that uses base64 to encode the heroimage and badgeimage.
+   Display a toast notification to prompt the user to upgrade to Microsoft 365 Apps.
 
 .EXAMPLE
-   PS C:\> .\Simple-Toast-Note.ps1
+   PS C:\> .\365AppsUpgrade.ps1
    Save the file to your hard drive with a .PS1 extention and run the file from an elavated PowerShell prompt.
 
 .NOTES
-   Parts of this script thanks to Maurice Daly / Ben Whitmore.
+   
 
 .FUNCTIONALITY
    PowerShell v1+
