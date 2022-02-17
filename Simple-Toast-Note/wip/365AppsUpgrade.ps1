@@ -243,10 +243,17 @@ function Display-ToastNotification
                 </subgroup>
             </group>
 			<group>
+<<<<<<< HEAD
 				<subgroup>
 					<text hint-style="body" hint-wrap="true" >$EventText3</text>
 				</subgroup>
 			</group>
+=======
+			<subgroup>
+				<text hint-style="body" hint-wrap="true" >$EventText3</text>
+			</subgroup>
+		</group>
+>>>>>>> f9674c926a99efd6dd393c05dd0502e0c2a7e632
         </binding>
     </visual>
     <audio src="ms-winsoundevent:notification.default"/>
