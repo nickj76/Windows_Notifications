@@ -1027,7 +1027,7 @@ $LogoImage = "$env:TEMP\ToastLogoImage.jpg"
     </binding>
     </visual>
     <actions>
-    <action arguments="$ButtonAction" content="$ButtonTitle" activationType="protocol" />
+        <action arguments="$ButtonAction" content="$ButtonTitle" activationType="protocol" />
         <action activationType="system" arguments="dismiss" content="$DismissButtonContent"/>
     </actions>
 </toast>
@@ -1063,6 +1063,7 @@ $Configs = [PSCustomObject]@{
     DismissButtonContent = "$DismissButtonText";
     Buttontitle = "$Buttontitle"
     Expiration = $Expiration
+    ButtonAction = "$ButtonAction"
 }
 ConvertTo-Json $Configs > "$dirAppDeployTemp\alertconfig.json"
 $InvokeITAlertToastContents > $dirAppDeployTemp\Invoke-ITAlertToast.ps1
