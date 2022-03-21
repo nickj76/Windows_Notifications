@@ -89,9 +89,9 @@ function Display-ToastNotification
 	
 	#Set COM App ID > To bring a URL on button press to focus use a browser for the appid e.g. MSEdge
 	#$LauncherID = "Microsoft.SoftwareCenter.DesktopToasts"
-	#$Launcherid = "Microsoft.CompanyPortal_8wekyb3d8bbwe!App"
+	$Launcherid = "Microsoft.CompanyPortal_8wekyb3d8bbwe!App"
 	#$LauncherID = "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe"
-	$Launcherid = "MSEdge"
+	#$Launcherid = "MSEdge"
 	
 	#Dont Create a Scheduled Task if the script is running in the context of the logged on user, only if SYSTEM fired the script i.e. Deployment from Intune/ConfigMgr
 	If (([System.Security.Principal.WindowsIdentity]::GetCurrent()).Name -eq "NT AUTHORITY\SYSTEM")
@@ -300,4 +300,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\365AppsToast-140322.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\365AppsToast-210322.txt"
