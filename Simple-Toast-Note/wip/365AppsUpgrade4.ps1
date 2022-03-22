@@ -35,7 +35,7 @@ $EventText = "The version of MS Office on your managed computer needs to be upgr
 $EventText2 = "For more information about this required upgrade please visit the IT FAQs on SurreyNet."
 $EventText3 = ""
 $ButtonTitle = "Upgrade Now"
-$ButtonAction = "companyportal:ApplicationId=968d5252-dce4-4629-a885-481914e72c9a"
+$ButtonAction = "companyportal:ApplicationId=e425de25-90c0-4bad-ab21-77b743dc43c3"
 
 $AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
 
@@ -300,4 +300,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\365AppsToast-210322.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\365AppsToast-220322.txt"
