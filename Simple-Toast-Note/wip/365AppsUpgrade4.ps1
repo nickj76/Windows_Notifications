@@ -300,4 +300,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\365AppsToast-220322.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\365AppsToast-230322.txt"
