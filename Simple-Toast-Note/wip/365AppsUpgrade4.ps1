@@ -26,18 +26,18 @@ Param
 #region ToastCustomisation
 
 #Create Toast Variables
-
+$AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
 # $CustomHello = "This is a Test of Notifications"
 $ToastTitle = "Upgrade to Microsoft 365 Apps."
 $Signature = "Sent by the IT Service Desk: $AlertTime"
 $EventTitle = "Required Upgrade to Microsoft 365 Apps."
 $EventText = "The version of MS Office on your managed computer needs to be upgraded, this will take around 30 minutes to complete. You can start the upgrade by clicking on the 'Upgrade Now' button below."
 $EventText2 = "For more information about this required upgrade please visit the IT FAQs on SurreyNet."
-$EventText3 = ""
+$EventText3 = "This required upgrade will be automatically installed from: 31st March 2022"
 $ButtonTitle = "Upgrade Now"
 $ButtonAction = "companyportal:ApplicationId=e425de25-90c0-4bad-ab21-77b743dc43c3"
 
-$AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
+
 
 #ToastDuration: Short = 7s, Long = 25s
 $ToastDuration = "long"
@@ -300,4 +300,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\365AppsToast-230322.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\365AppsToast-290322.txt"
