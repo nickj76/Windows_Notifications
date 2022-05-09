@@ -30,9 +30,10 @@ Param
 # $CustomHello = "This is a Test of Notifications"
 $ToastTitle = "Upgrade to Microsoft 365 Apps"
 $Signature = "Sent by the IT Service Desk: $AlertTime"
-$EventTitle = "Upgrade to Microsoft 365 Apps"
+$EventTitle = "Required Upgrade to Microsoft 365 Apps"
 $EventText = "Your device needs to be upgraded to Microsoft 365 Apps, this will take around 30 minutes to complete. You can start the upgrade by clicking on the 'Upgrade Now' button."
 $EventText2 = "For more information about this required upgrade please visit the IT FAQs on SurreyNet."
+$EventText3 = "This required upgrade will be automatically installed from: Monday 13th June"
 $ButtonTitle = "Upgrade Now"
 $ButtonAction = "https://it.surrey.ac.uk/contact-us"
 
@@ -241,6 +242,11 @@ function Display-ToastNotification
                     <text hint-style="body" hint-wrap="true" >$EventText2</text>
                 </subgroup>
             </group>
+			<group>
+			<subgroup>
+				<text hint-style="body" hint-wrap="true" >$EventText3</text>
+			</subgroup>
+		</group>
         </binding>
     </visual>
     <audio src="ms-winsoundevent:notification.default"/>
