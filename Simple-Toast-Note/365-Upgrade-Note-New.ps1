@@ -32,7 +32,7 @@ $ToastTitle = "Upgrade to Microsoft 365 Apps"
 $Signature = "Sent by the IT Service Desk: $AlertTime"
 $EventTitle = "Upgrade to Microsoft 365 Apps Now"
 $EventText = "This device requires an upgrade to Microsoft 365 Apps for Enterprise. This upgrade can be started by clicking on the 'Upgrade Now' button below or double clicking on 'Upgrade to Microsoft 365 Apps' on your desktop."
-$EventText2 = "This Upgrade will take around 30 minutes to complete and from Monday 11th July this upgrade will begin installing automatically."
+$EventText2 = "This Upgrade will take around 30 minutes to complete and from Monday 25th July this upgrade will begin installing automatically."
 $EventText3 = "For more information about this required upgrade click on 'IT Services FAQs' below."
 $ButtonTitle = "Upgrade Now"
 $ButtonAction = "companyportal:ApplicationId=e425de25-90c0-4bad-ab21-77b743dc43c3"
@@ -301,4 +301,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\Office-Upgrade-070722.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\Office-Upgrade-120722.txt"
