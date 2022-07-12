@@ -31,7 +31,7 @@ $AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
 $ToastTitle = "Upgrade required for MariaDB"
 $Signature = "Sent by the IT Service Desk: $AlertTime"
 $EventTitle = "Upgrade MariaDB Now"
-$EventText = "This device is running an outdated or unsupported version of MariaDB, please urgently upgrade to the latest stable release 10.6.8."
+$EventText = "This device is running an outdated or unsupported version of MariaDB, please urgently upgrade to the latest stable release 10.6.8. if you have already done this please ignore this message."
 $EventText3 = "If you require assistance completing this upgrade please contact itservicedesk@surrey.ac.uk or call 9898."
 
 #ToastDuration: Short = 7s, Long = 25s
