@@ -301,4 +301,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\Office-Upgrade-180722.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\Office-Upgrade-200722.txt"
