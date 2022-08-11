@@ -24,21 +24,20 @@ Param
 )
 
 #region ToastCustomisation
-
-#Create Toast Variables
 $AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
 
-# $CustomHello = "This is a Test of Notifications"
+#Create Toast Variables
+
 $ToastTitle = "Upgrade to Microsoft 365 Apps"
 $Signature = "Sent by the IT Service Desk: $AlertTime"
-$EventTitle = "Required Upgrade to Microsoft 365 Apps"
-$EventText = "Your device needs to be upgraded to Microsoft 365 Apps, this will take around 30 minutes to complete. You can start the upgrade by clicking on the 'Upgrade Now' button."
-$EventText2 = "For more information about this required upgrade please visit the IT FAQs on SurreyNet."
-$EventText3 = "This required upgrade will be automatically installed from: Monday 13th June"
+$EventTitle = "Upgrade to Microsoft 365 Apps Now"
+$EventText = "This device requires an upgrade to Microsoft 365 Apps for Enterprise. This upgrade can be started by clicking on the 'Upgrade Now' button below or double clicking on 'Upgrade to Microsoft 365 Apps' on your desktop."
+$EventText2 = "This is your final chance to upgrade at a time of your choosing."
+$EventText3 = "From week beginning Monday 22nd August this upgrade will automatically be installed and cannot be paused, stopped or skipped."
 $ButtonTitle = "Upgrade Now"
-$ButtonAction = "https://it.surrey.ac.uk/contact-us"
-
-
+$ButtonAction = "companyportal:ApplicationId=e425de25-90c0-4bad-ab21-77b743dc43c3"
+$ButtonTitle1 = "IT Services FAQs"
+$ButtonAction1 = "https://surreynet.surrey.ac.uk/staff-services/it-services/faqs/Desktop_software"
 
 #ToastDuration: Short = 7s, Long = 25s
 $ToastDuration = "long"
@@ -259,6 +258,7 @@ function Display-ToastNotification
 <toast>
     <actions>
         <action arguments="$ButtonAction" content="$ButtonTitle" activationType="protocol" />
+        <action arguments="$ButtonAction1" content="$ButtonTitle1" activationType="protocol" />
         <action arguments="dismiss" content="Dismiss" activationType="system"/>
     </actions>
 </toast>
@@ -301,4 +301,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\toast-22102021.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\Office-Upgrade-250722.txt"
