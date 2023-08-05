@@ -24,15 +24,21 @@ Param
 )
 
 #region ToastCustomisation
-$AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
 
 #Create Toast Variables
+$AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
 
-$ToastTitle = "Upgrade required for MariaDB"
+# $CustomHello = "This is a Test of Notifications"
+$ToastTitle = "Upgrade to Microsoft 365 Apps"
 $Signature = "Sent by the IT Service Desk: $AlertTime"
-$EventTitle = "Upgrade MariaDB Now"
-$EventText = "This device is running an outdated or unsupported version of MariaDB, please urgently upgrade to the latest stable release 10.6.8. if you have already done this please ignore this message."
-$EventText3 = "If you require assistance completing this upgrade please contact itservicedesk@surrey.ac.uk or call 9898."
+$EventTitle = "Required Upgrade to Microsoft 365 Apps"
+$EventText = "Your device needs to be upgraded to Microsoft 365 Apps, this will take around 30 minutes to complete. You can start the upgrade by clicking on the 'Upgrade Now' button."
+$EventText2 = "For more information about this required upgrade please visit the IT FAQs on SurreyNet."
+$EventText3 = "This required upgrade will be automatically installed from: Monday 13th June"
+$ButtonTitle = "Upgrade Now"
+$ButtonAction = "https://it.surrey.ac.uk/contact-us"
+
+
 
 #ToastDuration: Short = 7s, Long = 25s
 $ToastDuration = "long"
@@ -126,6 +132,68 @@ function Display-ToastNotification
 		Register-ScheduledTask -TaskName "Toast_Notification_$($ToastGuid)" -InputObject $New_Task
 	}
 	
+		# Alarm to get through focus assist
+        $scenario = $RawXml.CreateAttribute("scenario")
+        $scenario.Value = "alarm"
+        $audio = $RawXml.CreateElement("audio")
+        $silent = $RawXml.CreateAttribute("silent")
+        $silent.Value = "true"
+        $audio.Attributes.Append($silent) > $null
+        $toast = $RawXml.SelectSingleNode("toast")
+        $toast.Attributes.Append($scenario) > $null
+        $toast.AppendChild($audio) > $null # new audio element
+	
+        ($RawXml.toast.visual.binding.text|Where-Object {$_.id -eq "1"}).AppendChild($RawXml.CreateTextNode($ToastTitle)) > $null
+        ($RawXml.toast.visual.binding.text|Where-Object {$_.id -eq "2"}).AppendChild($RawXml.CreateTextNode($ToastText)) > $null
+     
+        $actions = $RawXml.CreateElement("actions")
+        $action2 = $RawXml.CreateElement("action")
+        $button2Type = $RawXml.CreateAttribute("activationType")
+        $button2Type.Value = "system"
+        $button2Arguments = $RawXml.CreateAttribute("arguments")
+        $button2Arguments.Value = "dismiss"
+        $button2Content = $RawXml.CreateAttribute("content")
+        $button2Content.Value = "Dismiss"
+        $action2.Attributes.Append($button2Type) > $null
+        $action2.Attributes.Append($button2Arguments) > $null
+        $action2.Attributes.Append($button2Content) > $null
+            
+
+        If($RestartBoolean){
+            Write-Host "Adding restart/dismiss buttons"
+            $action1 = $RawXml.CreateElement("action")
+            $button1Type = $RawXml.CreateAttribute("activationType")
+            $button1Type.Value = "protocol"
+            $button1Arguments = $RawXml.CreateAttribute("arguments")
+            $button1Arguments.Value = "ToastReboot:"
+            $button1Content = $RawXml.CreateAttribute("content")
+            $button1Content.Value = "Restart"
+
+            $action1.Attributes.Append($button1Type) > $null
+            $action1.Attributes.Append($button1Arguments) > $null
+            $action1.Attributes.Append($button1Content) > $null
+
+            $actions.AppendChild($action1) > $null
+        }
+        $actions.AppendChild($action2) > $null
+        $RawXml.DocumentElement.AppendChild($actions) > $null
+	
+        Write-Host $RawXml.OuterXml
+        $SerializedXml = New-Object Windows.Data.Xml.Dom.XmlDocument
+        $SerializedXml.LoadXml($RawXml.OuterXml)
+
+        $Toast = [Windows.UI.Notifications.ToastNotification]::new($SerializedXml)
+        $Toast.Tag = "PowerShell"
+        $Toast.Group = "PowerShell"
+        If($RestartBoolean){
+            $Toast.ExpirationTime = [DateTimeOffset]::Now.AddMinutes(120)
+        }else{
+            $Toast.ExpirationTime = [DateTimeOffset]::Now.AddMinutes(2)
+        }
+
+        $Notifier = [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("PowerShell")
+        $Notifier.Show($Toast);
+
 	#Run the toast of the script is running in the context of the Logged On User
 	If (!(([System.Security.Principal.WindowsIdentity]::GetCurrent()).Name -eq "NT AUTHORITY\SYSTEM"))
 	{
@@ -232,6 +300,11 @@ function Display-ToastNotification
                     <text hint-style="body" hint-wrap="true" >$EventText</text>
                 </subgroup>
             </group>
+            <group>
+                <subgroup>
+                    <text hint-style="body" hint-wrap="true" >$EventText2</text>
+                </subgroup>
+            </group>
 			<group>
 			<subgroup>
 				<text hint-style="body" hint-wrap="true" >$EventText3</text>
@@ -240,20 +313,19 @@ function Display-ToastNotification
         </binding>
     </visual>
     <audio src="ms-winsoundevent:notification.default"/>
-	<actions>
-            <input id="SnoozeTimer" type="selection" title="$SnoozeMessage" defaultInput="1">
-            <selection id="1" content="1 Minute"/>
-            <selection id="30" content="30 Minutes"/>
-            <selection id="60" content="1 Hour"/>
-            <selection id="120" content="2 Hours"/>
-            <selection id="240" content="4 Hours"/>
-        </input>
-        <action activationType="system" arguments="snooze" hint-inputId="SnoozeTimer" content="$SnoozeTitle" id="test-snooze"/>
+</toast>
+"@
+		
+		#Build XML ActionTemplate 
+		[xml]$ActionTemplate = @"
+<toast>
+    <actions>
+        <action arguments="$ButtonAction" content="$ButtonTitle" activationType="protocol" />
         <action arguments="dismiss" content="Dismiss" activationType="system"/>
     </actions>
 </toast>
 "@
-			
+		
 		#Define default actions to be added $ToastTemplate
 		$Action_Node = $ActionTemplate.toast.actions
 		
@@ -291,4 +363,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\MariaDB-Update120722.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\toast-22102021.txt"

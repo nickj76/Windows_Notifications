@@ -1,16 +1,16 @@
 <# 
 .SYNOPSIS
-   Toast notification about upgrading to Microsoft 365 Apps. 
+   Simple Toast Notification Script. 
 
 .DESCRIPTION
-   Display a toast notification to prompt the user to upgrade to Microsoft 365 Apps.
+   Simple Toast Notification Script that uses base64 to encode the heroimage and badgeimage.
 
 .EXAMPLE
-   PS C:\> .\365AppsUpgrade.ps1
+   PS C:\> .\Simple-Toast-Note.ps1
    Save the file to your hard drive with a .PS1 extention and run the file from an elavated PowerShell prompt.
 
 .NOTES
-   
+   Parts of this script thanks to Maurice Daly / Ben Whitmore.
 
 .FUNCTIONALITY
    PowerShell v1+
@@ -26,18 +26,14 @@ Param
 #region ToastCustomisation
 
 #Create Toast Variables
-$AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
+
 # $CustomHello = "This is a Test of Notifications"
-$ToastTitle = "Upgrade to Microsoft 365 Apps."
-$Signature = "Sent by the IT Service Desk: $AlertTime"
-$EventTitle = "Required Upgrade to Microsoft 365 Apps."
-$EventText = "The version of MS Office on your managed computer needs to be upgraded, this will take around 30 minutes to complete. You can start the upgrade by clicking on the 'Upgrade Now' button below."
-$EventText2 = "For more information about this required upgrade please visit the IT FAQs on SurreyNet."
-$EventText3 = "This required upgrade will be automatically installed from: Monday 13th June 2022"
-$ButtonTitle = "Upgrade Now"
-$ButtonAction = "companyportal:ApplicationId=e425de25-90c0-4bad-ab21-77b743dc43c3"
-
-
+$ToastTitle = "Important Information: Please review the details below before contacting the Service Desk."
+$Signature = "Sent on behalf of the IT Service Desk."
+$EventTitle = "Major IT Issues - All Systems Currently Offline."
+$EventText = "We are currently experiencing problems with all our systems. We are drinking coffee with our feet up and will provide an update shortly. Thank you for your patience."
+$ButtonTitle = "IT Service Desk"
+$ButtonAction = "https://it.surrey.ac.uk/contact-us"
 
 #ToastDuration: Short = 7s, Long = 25s
 $ToastDuration = "long"
@@ -208,11 +204,33 @@ function Display-ToastNotification
 			}
 		}
 		
+		#Try to get the DisplayName from whoami.
+		#If ($Null -eq $Firstname)
+		#{
+		#	Try
+		#	{
+		#		Write-Output "Trying Identity whoami.exe for DisplayName info..."
+		#		$User = whoami.exe
+		#		$Firstname = (Get-Culture).textinfo.totitlecase($User.Split("\")[1])
+		#		Write-Output "DisplayName retrieved from whoami.exe"
+		#	}
+		#	Catch
+		#	{
+		#		Write-Warning "Could not get DisplayName from whoami.exe"
+		#	}
+		#}
+		
 		#If DisplayName could not be obtained, leave it blank.
 		If ($Null -eq $Firstname)
 		{
 			Write-Output "DisplayName could not be obtained, it will be blank in the Toast"
 		}
+
+		#Get Hour of Day and set Custom Hello
+        $Hour = (Get-Date).Hour
+        If ($Hour -lt 12) { $CustomHello = "Good Morning $($Firstname)" }
+        ElseIf ($Hour -gt 16) { $CustomHello = "Good Evening $($Firstname)" }
+        Else { $CustomHello = "Good Afternoon $($Firstname)" }
 
 		#Load Assemblies
 		[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
@@ -223,6 +241,7 @@ function Display-ToastNotification
 		<toast duration="$ToastDuration" scenario="reminder">
     <visual>
         <binding template="ToastGeneric">
+            <text>$CustomHello</text>
             <text>$ToastTitle</text>
             <text placement="attribution">$Signature</text>
             <image placement="hero" src="$HeroImage"/>
@@ -237,16 +256,6 @@ function Display-ToastNotification
                     <text hint-style="body" hint-wrap="true" >$EventText</text>
                 </subgroup>
             </group>
-            <group>
-                <subgroup>
-                    <text hint-style="body" hint-wrap="true" >$EventText2</text>
-                </subgroup>
-            </group>
-			<group>
-				<subgroup>
-					<text hint-style="body" hint-wrap="true" >$EventText3</text>
-				</subgroup>
-			</group>
         </binding>
     </visual>
     <audio src="ms-winsoundevent:notification.default"/>
@@ -300,4 +309,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\365AppsToast-290322.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\toast-22102021.txt"

@@ -26,17 +26,19 @@ Param
 #region ToastCustomisation
 
 #Create Toast Variables
+$AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
 
 # $CustomHello = "This is a Test of Notifications"
-$ToastTitle = "Upgrade to Microsoft 365 Apps"
+$ToastTitle = "GlobalProtect VPN Upgrade"
 $Signature = "Sent by the IT Service Desk: $AlertTime"
-$EventTitle = "Upgrade to Microsoft 365 Apps - Device Group"
-$EventText = "Your device needs to be upgraded to Microsoft 365 Apps, this will take around 30 minutes to complete. You can start the upgrade by clicking on the 'Upgrade Now' button - Device Security Group test."
-$EventText2 = "For more information about this required upgrade please visit the IT FAQs on SurreyNet."
+$EventTitle = "GlobalProtect VPN Upgrade"
+$EventText = "Your GlobalProtect VPN client is out of date and requires an upgrade. You can start it now by clicking on the 'Upgrade Now' button."
+$EventText2 = "GlobalProtect will be automatically upgraded from Monday 5th June."
+$EventText3 = ""
 $ButtonTitle = "Upgrade Now"
-$ButtonAction = "https://it.surrey.ac.uk/contact-us"
+$ButtonAction = "companyportal:ApplicationId=657c6792-a7f1-4a24-b530-70d20549a808"
 
-$AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
+
 
 #ToastDuration: Short = 7s, Long = 25s
 $ToastDuration = "long"
@@ -241,6 +243,11 @@ function Display-ToastNotification
                     <text hint-style="body" hint-wrap="true" >$EventText2</text>
                 </subgroup>
             </group>
+			<group>
+			<subgroup>
+				<text hint-style="body" hint-wrap="true" >$EventText3</text>
+			</subgroup>
+		</group>
         </binding>
     </visual>
     <audio src="ms-winsoundevent:notification.default"/>
@@ -294,4 +301,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\Note-DSG-test.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\globalprotect6.1.1-5-Staff02.txt"

@@ -24,14 +24,15 @@ Param
 )
 
 #region ToastCustomisation
-$AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
+
 #Create Toast Variables
+$AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
 
 # $CustomHello = "This is a Test of Notifications"
 $ToastTitle = "Upgrade to Microsoft 365 Apps"
 $Signature = "Sent by the IT Service Desk: $AlertTime"
 $EventTitle = "Required Upgrade to Microsoft 365 Apps"
-$EventText = "Your device needs to be upgraded to Microsoft 365 Apps, this will take around 30 minutes to complete. You can start the upgrade by clicking on the 'Upgrade Now' button below or double clicking on 'Upgrade to Microsoft 365 Apps' on your desktop."
+$EventText = "Your device needs to be upgraded to Microsoft 365 Apps, this will take around 30 minutes to complete. You can start the upgrade by clicking on the 'Upgrade Now' button."
 $EventText2 = "For more information about this required upgrade please visit the IT FAQs on SurreyNet."
 $EventText3 = "This required upgrade will be automatically installed from: Monday 13th June"
 $ButtonTitle = "Upgrade Now"

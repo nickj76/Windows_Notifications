@@ -1,16 +1,16 @@
 <# 
 .SYNOPSIS
-   Toast notification about upgrading to Microsoft 365 Apps. 
+   Simple Toast Notification Script. 
 
 .DESCRIPTION
-   Display a toast notification to prompt the user to upgrade to Microsoft 365 Apps.
+   Simple Toast Notification Script that uses base64 to encode the heroimage and badgeimage.
 
 .EXAMPLE
-   PS C:\> .\365AppsUpgrade.ps1
+   PS C:\> .\Simple-Toast-Note.ps1
    Save the file to your hard drive with a .PS1 extention and run the file from an elavated PowerShell prompt.
 
 .NOTES
-   
+   Parts of this script thanks to Maurice Daly / Ben Whitmore.
 
 .FUNCTIONALITY
    PowerShell v1+
@@ -26,18 +26,19 @@ Param
 #region ToastCustomisation
 
 #Create Toast Variables
+$AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
 
 # $CustomHello = "This is a Test of Notifications"
-$ToastTitle = "Upgrade to Microsoft 365 Apps."
+$ToastTitle = "GlobalProtect VPN Upgrade"
 $Signature = "Sent by the IT Service Desk: $AlertTime"
-$EventTitle = "Required Upgrade to Microsoft 365 Apps."
-$EventText = "The version of MS Office on your managed device needs to be upgraded, this will take around 30 minutes to complete. You can start the upgrade by clicking on the 'Upgrade Now' button below."
-$EventText2 = "For more information about this required upgrade please visit the IT FAQs on SurreyNet."
-$EventText3 = "This required upgrade will be automatically installed from: 5th April 2022"
+$EventTitle = "GlobalProtect VPN Upgrade"
+$EventText = "Your GlobalProtect VPN client is out of date and requires an upgrade. You can start it now by clicking on the 'Upgrade Now' button."
+$EventText2 = "GlobalProtect will be automatically upgraded from Monday 5th June."
+$EventText3 = ""
 $ButtonTitle = "Upgrade Now"
-$ButtonAction = "companyportal:ApplicationId=968d5252-dce4-4629-a885-481914e72c9a"
+$ButtonAction = "companyportal:ApplicationId=657c6792-a7f1-4a24-b530-70d20549a808"
 
-$AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
+
 
 #ToastDuration: Short = 7s, Long = 25s
 $ToastDuration = "long"
@@ -89,9 +90,9 @@ function Display-ToastNotification
 	
 	#Set COM App ID > To bring a URL on button press to focus use a browser for the appid e.g. MSEdge
 	#$LauncherID = "Microsoft.SoftwareCenter.DesktopToasts"
-	$Launcherid = "Microsoft.CompanyPortal_8wekyb3d8bbwe!App"
+	#$Launcherid = "Microsoft.CompanyPortal_8wekyb3d8bbwe!App"
 	#$LauncherID = "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe"
-	#$Launcherid = "MSEdge"
+	$Launcherid = "MSEdge"
 	
 	#Dont Create a Scheduled Task if the script is running in the context of the logged on user, only if SYSTEM fired the script i.e. Deployment from Intune/ConfigMgr
 	If (([System.Security.Principal.WindowsIdentity]::GetCurrent()).Name -eq "NT AUTHORITY\SYSTEM")
@@ -243,10 +244,10 @@ function Display-ToastNotification
                 </subgroup>
             </group>
 			<group>
-				<subgroup>
-					<text hint-style="body" hint-wrap="true" >$EventText3</text>
-				</subgroup>
-			</group>
+			<subgroup>
+				<text hint-style="body" hint-wrap="true" >$EventText3</text>
+			</subgroup>
+		</group>
         </binding>
     </visual>
     <audio src="ms-winsoundevent:notification.default"/>
@@ -300,4 +301,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\365AppsToast-160222.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\globalprotect6.1.1-5-Staff02.txt"

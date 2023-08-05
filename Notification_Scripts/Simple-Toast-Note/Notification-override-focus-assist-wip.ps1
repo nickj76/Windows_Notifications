@@ -1,16 +1,16 @@
 <# 
 .SYNOPSIS
-   Toast notification about upgrading to Microsoft 365 Apps. 
+   Simple Toast Notification Script. 
 
 .DESCRIPTION
-   Display a toast notification to prompt the user to upgrade to Microsoft 365 Apps.
+   Simple Toast Notification Script that uses base64 to encode the heroimage and badgeimage.
 
 .EXAMPLE
-   PS C:\> .\365AppsUpgrade.ps1
+   PS C:\> .\Simple-Toast-Note.ps1
    Save the file to your hard drive with a .PS1 extention and run the file from an elavated PowerShell prompt.
 
 .NOTES
-   
+   Parts of this script thanks to Maurice Daly / Ben Whitmore.
 
 .FUNCTIONALITY
    PowerShell v1+
@@ -26,18 +26,19 @@ Param
 #region ToastCustomisation
 
 #Create Toast Variables
+$AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
 
 # $CustomHello = "This is a Test of Notifications"
-$ToastTitle = "Upgrade to Microsoft 365 Apps."
+$ToastTitle = "Upgrade to Microsoft 365 Apps"
 $Signature = "Sent by the IT Service Desk: $AlertTime"
-$EventTitle = "Required Upgrade to Microsoft 365 Apps."
-$EventText = "The version of MS Office on your managed computer needs to be upgraded, this will take around 30 minutes to complete. You can start the upgrade by clicking on the 'Upgrade Now' button below."
+$EventTitle = "Required Upgrade to Microsoft 365 Apps"
+$EventText = "Your device needs to be upgraded to Microsoft 365 Apps, this will take around 30 minutes to complete. You can start the upgrade by clicking on the 'Upgrade Now' button."
 $EventText2 = "For more information about this required upgrade please visit the IT FAQs on SurreyNet."
-$EventText3 = ""
+$EventText3 = "This required upgrade will be automatically installed from: Monday 13th June"
 $ButtonTitle = "Upgrade Now"
-$ButtonAction = "companyportal:ApplicationId=968d5252-dce4-4629-a885-481914e72c9a"
+$ButtonAction = "https://it.surrey.ac.uk/contact-us"
 
-$AlertTime = (Get-Date -Format 'dd/MM @ hh:mm tt')
+
 
 #ToastDuration: Short = 7s, Long = 25s
 $ToastDuration = "long"
@@ -131,6 +132,68 @@ function Display-ToastNotification
 		Register-ScheduledTask -TaskName "Toast_Notification_$($ToastGuid)" -InputObject $New_Task
 	}
 	
+		# Alarm to get through focus assist
+        $scenario = $RawXml.CreateAttribute("scenario")
+        $scenario.Value = "alarm"
+        $audio = $RawXml.CreateElement("audio")
+        $silent = $RawXml.CreateAttribute("silent")
+        $silent.Value = "true"
+        $audio.Attributes.Append($silent) > $null
+        $toast = $RawXml.SelectSingleNode("toast")
+        $toast.Attributes.Append($scenario) > $null
+        $toast.AppendChild($audio) > $null # new audio element
+	
+        ($RawXml.toast.visual.binding.text|Where-Object {$_.id -eq "1"}).AppendChild($RawXml.CreateTextNode($ToastTitle)) > $null
+        ($RawXml.toast.visual.binding.text|Where-Object {$_.id -eq "2"}).AppendChild($RawXml.CreateTextNode($ToastText)) > $null
+     
+        $actions = $RawXml.CreateElement("actions")
+        $action2 = $RawXml.CreateElement("action")
+        $button2Type = $RawXml.CreateAttribute("activationType")
+        $button2Type.Value = "system"
+        $button2Arguments = $RawXml.CreateAttribute("arguments")
+        $button2Arguments.Value = "dismiss"
+        $button2Content = $RawXml.CreateAttribute("content")
+        $button2Content.Value = "Dismiss"
+        $action2.Attributes.Append($button2Type) > $null
+        $action2.Attributes.Append($button2Arguments) > $null
+        $action2.Attributes.Append($button2Content) > $null
+            
+
+        If($RestartBoolean){
+            Write-Host "Adding restart/dismiss buttons"
+            $action1 = $RawXml.CreateElement("action")
+            $button1Type = $RawXml.CreateAttribute("activationType")
+            $button1Type.Value = "protocol"
+            $button1Arguments = $RawXml.CreateAttribute("arguments")
+            $button1Arguments.Value = "ToastReboot:"
+            $button1Content = $RawXml.CreateAttribute("content")
+            $button1Content.Value = "Restart"
+
+            $action1.Attributes.Append($button1Type) > $null
+            $action1.Attributes.Append($button1Arguments) > $null
+            $action1.Attributes.Append($button1Content) > $null
+
+            $actions.AppendChild($action1) > $null
+        }
+        $actions.AppendChild($action2) > $null
+        $RawXml.DocumentElement.AppendChild($actions) > $null
+	
+        Write-Host $RawXml.OuterXml
+        $SerializedXml = New-Object Windows.Data.Xml.Dom.XmlDocument
+        $SerializedXml.LoadXml($RawXml.OuterXml)
+
+        $Toast = [Windows.UI.Notifications.ToastNotification]::new($SerializedXml)
+        $Toast.Tag = "PowerShell"
+        $Toast.Group = "PowerShell"
+        If($RestartBoolean){
+            $Toast.ExpirationTime = [DateTimeOffset]::Now.AddMinutes(120)
+        }else{
+            $Toast.ExpirationTime = [DateTimeOffset]::Now.AddMinutes(2)
+        }
+
+        $Notifier = [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("PowerShell")
+        $Notifier.Show($Toast);
+
 	#Run the toast of the script is running in the context of the Logged On User
 	If (!(([System.Security.Principal.WindowsIdentity]::GetCurrent()).Name -eq "NT AUTHORITY\SYSTEM"))
 	{
@@ -243,10 +306,10 @@ function Display-ToastNotification
                 </subgroup>
             </group>
 			<group>
-				<subgroup>
-					<text hint-style="body" hint-wrap="true" >$EventText3</text>
-				</subgroup>
-			</group>
+			<subgroup>
+				<text hint-style="body" hint-wrap="true" >$EventText3</text>
+			</subgroup>
+		</group>
         </binding>
     </visual>
     <audio src="ms-winsoundevent:notification.default"/>
@@ -300,4 +363,4 @@ If(!(test-path $logfilespath))
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
-New-Item -ItemType "file" -Path "c:\logfiles\365AppsToast-140322.txt"
+New-Item -ItemType "file" -Path "c:\logfiles\toast-22102021.txt"
